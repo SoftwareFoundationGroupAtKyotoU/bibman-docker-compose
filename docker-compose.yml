@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:4000:80"
+    depends_on:
+      - postgres
+    volumes:
+      - ./configure.ml:/var/www/bibman/config/configure.ml:ro
+      - ./DB_config.om:/var/www/bibman/script/DB_config.om:ro
+    command: >-
+      bash -c "dockerize -wait tcp://postgres:5432
+      && cd /var/www/bibman
+      && eval $$(opam env)
+      && omake clean
+      && omake
+      && apache2ctl -DFOREGROUND"
+
+  postgres:
+    image: postgres
+    env_file:
+      - bibman.env
+    # environment:
+    #   - POSTGRES_USER
+    #   - POSTGERS_PASSWORD
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+
+volumes:
+  postgres_db:

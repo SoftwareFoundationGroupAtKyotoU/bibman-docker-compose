@@ -1,0 +1,3 @@
+[submodule "bibman"]
+	path = bibman
+	url = https://github.com/SoftwareFoundationGroupAtKyotoU/bibman.git
