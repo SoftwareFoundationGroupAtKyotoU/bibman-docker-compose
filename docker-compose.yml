@@ -7,16 +7,15 @@ services:
       - "127.0.0.1:4000:80"
     depends_on:
       - postgres
+    env_file:
+      - bibman.env
+    # environment:
+    #   - MAILNAME
+    #   - SMARTHOST
     volumes:
       - ./configure.ml:/var/www/bibman/config/configure.ml:ro
       - ./DB_config.om:/var/www/bibman/script/DB_config.om:ro
-    command: >-
-      bash -c "dockerize -wait tcp://postgres:5432
-      && cd /var/www/bibman
-      && eval $$(opam env)
-      && omake clean
-      && omake
-      && apache2ctl -DFOREGROUND"
+    command: bash /run.sh
 
   postgres:
     image: postgres

@@ -4,6 +4,7 @@ RUN apt-get update \
  && apt-get install -y \
         apache2 \
         camlp4-extra \
+        exim4 \
         libgmp-dev \
         libpcre3-dev \
         mccs \
@@ -35,4 +36,8 @@ RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf \
  && a2enconf fqdn \
  && a2enmod cgid rewrite
 
+COPY update-exim4.conf.conf /etc/exim4/update-exim4.conf.conf
+
 COPY bibman /var/www/bibman/
+
+COPY run.sh /run.sh
