@@ -23,7 +23,7 @@ services:
       - bibman.env
     # environment:
     #   - POSTGRES_USER
-    #   - POSTGERS_PASSWORD
+    #   - POSTGRES_PASSWORD
     volumes:
       - postgres_db:/var/lib/postgresql/data
       - ./initdb:/docker-entrypoint-initdb.d
