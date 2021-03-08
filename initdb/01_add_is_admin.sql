@@ -1,0 +1,1 @@
+ALTER TABLE member ADD COLUMN is_admin boolean NOT NULL DEFAULT FALSE;
