@@ -12,6 +12,8 @@ services:
     # environment:
     #   - MAILNAME
     #   - SMARTHOST
+    environment:
+      - DEBUG=1
     volumes:
       - ./configure.ml:/var/www/bibman/config/configure.ml:ro
       - ./DB_config.om:/var/www/bibman/script/DB_config.om:ro
